@@ -1,42 +1,62 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.App {
+  height: 100vh;
+  width: 100vw;
+  background-color: #c2c2c2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.appContainer {
+  width: 95%;
+  max-width: 95vh;
+  display: flex;
+}
+.fieldContainer {
+  width: calc(100% - 150px);
+}
+.sideContents {
+  width: 150px;
+  padding: 5px 5px;
+}
+.menuDialog {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c2c2c2;
+}
+.menuContainer {
+  /* width: 95%; */
+}
+.stopButton {
+  background: #c2c2c2;
+  box-shadow: 6px 6px 6px #a7a7a7, -6px -6px 6px #dddddd;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 5px 0;
+  font-weight: bold;
   text-align: center;
+  color: rgb(63, 63, 63);
+  margin-bottom: 10px;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.nowColor {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 5px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.nowColor.player1 {
+  background: #66cdaa;
+  color: white;
+  box-shadow: inset 6px 6px 6px #58b092, inset -6px -6px 6px #74eac2;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.nowColor.player2 {
+  background: #e9967a;
+  color: white;
+  box-shadow: inset 6px 6px 6px #c88169, inset -6px -6px 6px #ffab8b;
 }

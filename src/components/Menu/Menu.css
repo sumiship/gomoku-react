@@ -1,0 +1,46 @@
+.MenuComponent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+.playerSelectContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+.label {
+  font-size: 26px;
+}
+.selectArea {
+  font-size: 25px;
+  padding: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: rgb(63, 63, 63);
+}
+.player1 > .active {
+  background: #66cdaa;
+  color: white;
+  box-shadow: inset 6px 6px 6px #58b092, inset -6px -6px 6px #74eac2;
+}
+.player2 > .active {
+  background: #e9967a;
+  color: white;
+  box-shadow: inset 6px 6px 6px #c88169, inset -6px -6px 6px #ffab8b;
+}
+.startButton {
+  cursor: pointer;
+  display: inline-block;
+  padding: 3px 7px;
+  font-size: 20px;
+  margin: 10px auto 0;
+  text-align: center;
+  background: #ffffff;
+  color: rgb(63, 63, 63);
+  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: 6px 6px 6px #dbdbdb, -6px -6px 6px #ffffff;
+}

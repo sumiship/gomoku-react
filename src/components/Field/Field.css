@@ -1,0 +1,53 @@
+.FieldComponent {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cell {
+  position: relative;
+}
+
+.cellItem {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  right: 2px;
+  border-radius: 5px;
+  background-color: #dcdcdc;
+  box-shadow: 2px 2px 0px #4e4e4e, -1px -1px 0px #ffffff;
+}
+
+.cellItem.empty:not(.disabled) {
+  cursor: pointer;
+}
+
+.cellItem.empty:not(.disabled):hover {
+  background-color: #c2c2c2;
+}
+
+.cellItem.player1::after {
+  content: '';
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+  background: linear-gradient(145deg, #6ddbb6, #5cb999);
+  box-shadow: 2px 2px 0px #2ab496, -1px -1px 0px #72e6be;
+}
+.cellItem.player2::after {
+  content: '';
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+  background: linear-gradient(145deg, #f9a183, #d2876e);
+  box-shadow: 2px 2px 0px #cd846b, -1px -1px 0px #ffa889;
+}
