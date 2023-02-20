@@ -1,31 +1,29 @@
 import './App.css'
 import FieldComponent from './components/Field/Field'
-import { updatedField, is5Chain, Field, initField } from './modules/field'
+import { updatedField, is5Chain, Field, initField, coordinateDecode, coordinateEncode } from './modules/field'
 import { Player, toggledPlayer } from './modules/player'
-import { useCoordinateFunc } from './modules/coordinate'
-import { useEffect, useReducer, useState } from 'react'
+import { useReducer, useState } from 'react'
 import MenuComponent from './components/Menu/Menu'
-import { FIELD_SIZE } from './modules/constants'
+import { searchBestCoordinate, useNullCellManager } from './modules/searchBestCoordinate'
 
 let player: Player = 1
 let field: Field = []
 let isCPU = [false, false]
+const nullCellManager = useNullCellManager()
 const App: React.FC = () => {
   const [playerState, setPlayerState] = useState(1)
   const [fieldState, setFieldState] = useState<Field>([])
   const [disableField, setDisabledField] = useState(true)
   const [isOpenMenu, toggleIsOpenMenu] = useReducer(b => !b, true)
-  const coordinateFunc = useCoordinateFunc()
   const [isEnd, setIsEnd] = useState(true)
+  const [isMovingCPU, setIsMovingCPU] = useState(false)
 
   const cellClick = (coordinateCode: number) => {
-    console.log('cellClick')
-
     setDisabledField(true)
     field = updatedField(field, { type: 'push', player, coordinateCode })
     setFieldState(field)
 
-    if (is5Chain(field, coordinateFunc.decode(coordinateCode))) {
+    if (is5Chain(field, coordinateDecode(coordinateCode))) {
       console.log('end')
       setIsEnd(true)
       return
@@ -33,20 +31,22 @@ const App: React.FC = () => {
 
     player = toggledPlayer(player)
     setPlayerState(player)
-    console.log(isCPU)
-    console.log(player)
 
+    nullCellManager.putCell(coordinateDecode(coordinateCode))
     isCPU[player - 1] ? callCpu() : setDisabledField(false)
   }
 
   const callCpu = () => {
-    const coordinate = { x: Math.floor(Math.random() * FIELD_SIZE), y: Math.floor(Math.random() * FIELD_SIZE) }
+    setIsMovingCPU(true)
     window.setTimeout(() => {
-      cellClick(coordinateFunc.encode(coordinate))
+      const ans = searchBestCoordinate(field, player, nullCellManager.cells)
+      setIsMovingCPU(false)
+      cellClick(coordinateEncode(ans))
     }, 50)
   }
 
   const gameStart = (isCPU1: boolean, isCPU2: boolean) => {
+    nullCellManager.reset()
     isCPU = [isCPU1, isCPU2]
     toggleIsOpenMenu()
     field = initField()
@@ -71,7 +71,10 @@ const App: React.FC = () => {
           <div onClick={gameEnd} className="stopButton">
             END
           </div>
-          <div className={`nowColor ${playerState === 1 ? 'player1' : 'player2'}`}>{isEnd ? 'WIN' : '　'}</div>
+          <div className={`nowColor ${playerState === 1 ? 'player1' : 'player2'}`}>
+            {isMovingCPU ? 'SEARCH' : isEnd ? 'WIN' : '　'}
+          </div>
+          {/* <div onClick={callCpu}>test</div> */}
         </div>
       </div>
       {isOpenMenu && (
