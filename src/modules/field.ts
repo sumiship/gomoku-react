@@ -22,7 +22,7 @@ type updatedFieldAction = {
 
 export const coordinateEncode = (a: Coordinate): number => a.y * FIELD_SIZE + a.x
 export const coordinateDecode = (a: number): Coordinate => ({ x: a % FIELD_SIZE, y: Math.floor(a / FIELD_SIZE) })
-export const isInside = (a: Coordinate): boolean => a.x >= 0 && a.y >= 0 && a.x <= FIELD_SIZE && a.y <= FIELD_SIZE
+export const isInside = (a: Coordinate): boolean => a.x >= 0 && a.y >= 0 && a.x < FIELD_SIZE && a.y < FIELD_SIZE
 export const adjacentCoordinate = (a: Coordinate): Coordinate[] =>
   [
     ...directions.map(direction => coordinateFunc.sum(direction, a)),
