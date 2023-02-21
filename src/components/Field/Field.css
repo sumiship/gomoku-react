@@ -19,11 +19,15 @@
   box-shadow: 2px 2px 0px #4e4e4e, -1px -1px 0px #ffffff;
 }
 
-.cellItem.empty:not(.disabled) {
+.cell.lastHand > .cellItem {
+  background-color: #f8ffb7;
+}
+
+.cell:not(.disabled) > .cellItem.empty {
   cursor: pointer;
 }
 
-.cellItem.empty:not(.disabled):hover {
+.cell:not(.disabled) > .cellItem.empty:hover {
   background-color: #c2c2c2;
 }
 

@@ -17,8 +17,10 @@ const App: React.FC = () => {
   const [isOpenMenu, toggleIsOpenMenu] = useReducer(b => !b, true)
   const [isEnd, setIsEnd] = useState(true)
   const [isMovingCPU, setIsMovingCPU] = useState(false)
+  const [lastHand, setLastHand] = useState<null | number>(null)
 
   const cellClick = (coordinateCode: number) => {
+    setLastHand(coordinateCode)
     setDisabledField(true)
     field = updatedField(field, { type: 'push', player, coordinateCode })
     setFieldState(field)
@@ -46,6 +48,7 @@ const App: React.FC = () => {
   }
 
   const gameStart = (isCPU1: boolean, isCPU2: boolean) => {
+    setLastHand(null)
     nullCellManager.reset()
     isCPU = [isCPU1, isCPU2]
     toggleIsOpenMenu()
@@ -65,7 +68,7 @@ const App: React.FC = () => {
     <div className="App">
       <div className="appContainer">
         <div className="fieldContainer">
-          <FieldComponent disabled={disableField} field={fieldState} cellClick={cellClick} />
+          <FieldComponent disabled={disableField} field={fieldState} cellClick={cellClick} lastHand={lastHand} />
         </div>
         <div className="sideContents">
           <div onClick={gameEnd} className="stopButton">
