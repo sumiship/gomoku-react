@@ -111,7 +111,7 @@ export const evalField = (field: Field): number => {
         .reduce((sum, e) => sum + e, 0)
     if (cell === 2)
       player2Point += directions
-        .map(direction => looseChainLength(field, coordinateDecode(index), direction))
+        .map(direction => looseChainLength(field, coordinateDecode(index), direction) ** 2)
         .reduce((sum, e) => sum + e, 0)
   })
   return player1Point - player2Point
