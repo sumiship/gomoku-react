@@ -80,8 +80,10 @@ export const is5Chain = (field: Field, coordinate: Coordinate): boolean => {
  */
 const looseChainLength = (field: Field, coordinate: Coordinate, direction: Coordinate): number => {
   let length = 0
+  let looseLength = 0
   const baseCell = field[coordinateEncode(coordinate)]
   for (let i = 1; i <= FIELD_SIZE; i++) {
+    looseLength++
     const searchCoordinate = coordinateFunc.sum(coordinate, coordinateFunc.mult(direction, i))
     if (!isInside(searchCoordinate)) break
     const searchCell = field[coordinateEncode(searchCoordinate)]
@@ -90,6 +92,7 @@ const looseChainLength = (field: Field, coordinate: Coordinate, direction: Coord
     length++
   }
   for (let i = 1; i <= FIELD_SIZE; i++) {
+    looseLength++
     const searchCoordinate = coordinateFunc.sum(coordinate, coordinateFunc.mult(direction, -i))
     if (!isInside(searchCoordinate)) break
     const searchCell = field[coordinateEncode(searchCoordinate)]
@@ -98,7 +101,7 @@ const looseChainLength = (field: Field, coordinate: Coordinate, direction: Coord
     length++
   }
 
-  return length + 1
+  return looseLength <= 5 ? 0 : length + 1
 }
 
 export const evalField = (field: Field): number => {
